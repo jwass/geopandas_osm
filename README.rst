@@ -15,3 +15,5 @@ a virtual environment. Clone the repo.
     df = geopandas_osm.osm.query_osm('way', poly.bounds, recurse='down', tags='highway')
     
 
+
+Project skeleton based on http://github.com/mapbox/pyskel
