@@ -134,7 +134,7 @@ def _build_url(typ, bbox=None, recurse=None, tags='', meta=False):
     else:
         metastr = ''
 
-    query = '({typ}{bbox}{queries};{recurse});out {meta};'.format(
+    query = '({typ}{bbox}{queries};{recurse};);out {meta};'.format(
         typ=typ, bbox=bboxstr, queries=queries, recurse=recursestr, meta=metastr)
 
     url = ''.join(['http://www.overpass-api.de/api/interpreter?', 
