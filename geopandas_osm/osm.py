@@ -125,10 +125,10 @@ def _build_url(typ, bbox=None, recurse=None, tags='', meta=False):
     if bbox is None:
         bboxstr = ''
     else:
-        #bboxstr = "({})".format(
-            #','.join(str(b) for b in (bbox[1], bbox[0], bbox[3], bbox[2])))
-        bboxstr = '(poly:"{}")'.format(
-            ' '.join('{c[1]} {c[0]}'.format(c=c) for c in bbox.exterior.coords))
+        bboxstr = "({})".format(
+            ','.join(str(b) for b in (bbox[1], bbox[0], bbox[3], bbox[2])))
+        # bboxstr = '(poly:"{}")'.format(
+        #     ' '.join('{c[1]} {c[0]}'.format(c=c) for c in bbox.exterior.coords))
 
     if meta:
         metastr = 'meta'
