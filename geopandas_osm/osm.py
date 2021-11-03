@@ -3,7 +3,8 @@ import xml.etree.ElementTree as ET
 
 import fiona.crs
 import geopandas as gpd
-from pandas.io.common import urlopen, urlencode
+from urllib.parse import urlencode
+from urllib.request import urlopen
 import pandas as pd
 from shapely.geometry import Point, LineString
 from six import string_types
@@ -124,10 +125,10 @@ def _build_url(typ, bbox=None, recurse=None, tags='', meta=False):
     if bbox is None:
         bboxstr = ''
     else:
-        #bboxstr = "({})".format(
-            #','.join(str(b) for b in (bbox[1], bbox[0], bbox[3], bbox[2])))
-        bboxstr = '(poly:"{}")'.format(
-            ' '.join('{c[1]} {c[0]}'.format(c=c) for c in bbox.exterior.coords))
+        bboxstr = "({})".format(
+            ','.join(str(b) for b in (bbox[1], bbox[0], bbox[3], bbox[2])))
+        # bboxstr = '(poly:"{}")'.format(
+        #     ' '.join('{c[1]} {c[0]}'.format(c=c) for c in bbox.exterior.coords))
 
     if meta:
         metastr = 'meta'
@@ -296,7 +297,7 @@ def render_ways(nodes, waynodes, waytags):
     node_points = nodes[['id', 'lon', 'lat']]
 
     def wayline(df):
-        df = df.sort_index(by='index')[['lon', 'lat']]
+        df = df.sort_values(by='index')[['lon', 'lat']]
         return LineString(df.values)
 
     # Group the ways and create a LineString for each one.  way_lines is a
